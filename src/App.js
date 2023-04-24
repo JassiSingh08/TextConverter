@@ -1,7 +1,7 @@
-import logo from "./logo.svg";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import Textarea from "./components/Textarea";
+import Button from "./components/Button";
 
 function App() {
   return (
@@ -10,6 +10,7 @@ function App() {
       <div className="container my-3">
         <h2>Enter your text here</h2>
         <Textarea />
+        <Button />
       </div>
     </>
   );
