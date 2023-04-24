@@ -66,14 +66,14 @@ const Textarea = () => {
         <button className="btn btn-primary my-2 mx-2" onClick={HandleLOclick}>
           Convert to Lowercase
         </button>
+        <button className="btn btn-primary my-2 mx-2" onClick={handleCapitalize}>
+          Capitalize
+        </button>
         <button className="btn btn-primary my-2 mx-2" onClick={HandleSpeech}>
           Speak Text
         </button>
         <button className="btn btn-primary my-2 mx-2" onClick={HandleStopSpeech}>
           Stop Speech
-        </button>
-        <button className="btn btn-primary my-2 mx-2" onClick={handleCapitalize}>
-          Capitalize
         </button>
         <button className="btn btn-primary my-2 mx-2" onClick={HandleClearClick} >
           Clear Text
