@@ -108,9 +108,7 @@ const Textarea = (props) => {
   }
 
   let wordsC = () => {
-    let wordsCount =
-      text.split(" ")[text.split(" ").length - 1] === "" ? text.split(" ").length - 1 : text.split(" ").length;
-
+    let wordsCount = text.split(/\s+/).filter((element) => {return element.length!==0}).length
     return wordsCount;
   };
 
