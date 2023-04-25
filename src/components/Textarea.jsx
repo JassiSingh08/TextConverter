@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Textarea = () => {
+const Textarea = (props) => {
   const [text, setText] = useState("");
 
   let HandleUPclick = () => {
@@ -28,13 +28,21 @@ const Textarea = () => {
     const synth = window.speechSynthesis;
     synth.cancel();
   };
-
+  
   const handleCapitalize = () => {
-    let newText = text
-      .split(" ")
-      .map((el) => el.charAt(0).toUpperCase() + el.slice(1))
-      .join(" ");
+    let newText = text.split(" ").map((el) => el.charAt(0).toUpperCase() + el.slice(1)).join(" ");
     setText(newText);
+  };
+  
+  let HandleCopyClick = () => {
+    let newText =  document.getElementById("exampleFormControlTextarea1");
+    newText.select();
+    navigator.clipboard.writeText(newText.value);
+  };
+
+  let HandleExtraSpaces = () => {
+    let newText =  text.split(/[ ] +/);
+    setText(newText.join(" "));
   };
 
   function HandleONchange(e) {
@@ -52,7 +60,8 @@ const Textarea = () => {
 
   return (
     <>
-      <div className="mb-3">
+      <div className="mb-3" style={{color:props.mode === 'dark'? 'white' : 'black' }}>
+        <h2>{props.heading}</h2>
         <textarea
           className="form-control"
           id="exampleFormControlTextarea1"
@@ -78,18 +87,25 @@ const Textarea = () => {
         <button className="btn btn-primary my-2 mx-2" onClick={HandleClearClick} >
           Clear Text
         </button>
+        <button className="btn btn-primary my-2 mx-2" onClick={HandleCopyClick} >
+          Copy Text
+        </button>
+        <button className="btn btn-primary my-2 mx-2" onClick={HandleExtraSpaces} >
+          Remove Extra Spaces
+        </button>
       </div>
-      <div className="container my-3">
+      <div className="container my-3" style={{color:props.mode === 'dark'? 'white' : 'black' }}>
         <h1>Your text summary</h1>
         <p>
           {wordsC()} words and {text.length} character
         </p>
         <p>{0.008 * wordsC()} minutes to read. </p>
         <h2>Preview</h2>
-        <p>{text}</p>
+        <p>{text.length>0? text : "Enter Something above to preview it here!"}</p>
       </div>
     </>
   );
 };
+
 
 export default Textarea;
