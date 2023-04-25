@@ -6,43 +6,51 @@ const Textarea = (props) => {
   let HandleUPclick = () => {
     let newText = text.toUpperCase();
     setText(newText);
+    props.showAlert("Converted to Uppercase", "success");
   };
-
+  
   let HandleLOclick = () => {
     let newText = text.toLowerCase();
     setText(newText);
+    props.showAlert("Converted to Lowercase", "success");
   };
-
+  
   let HandleClearClick = () => {
     let newText = "";
     setText(newText);
+    props.showAlert("Text Cleared!", "success");
   };
-
+  
   let HandleSpeech = () => {
     let msg = new SpeechSynthesisUtterance();
     msg.text = text;
     window.speechSynthesis.speak(msg);
+    props.showAlert("Speaking", "success");
   };
-
+  
   let HandleStopSpeech = () => {
     const synth = window.speechSynthesis;
     synth.cancel();
+    props.showAlert("Stopped!", "success");
   };
   
   const handleCapitalize = () => {
     let newText = text.split(" ").map((el) => el.charAt(0).toUpperCase() + el.slice(1)).join(" ");
     setText(newText);
+    props.showAlert("Text Capitalized!", "success");
   };
   
   let HandleCopyClick = () => {
     let newText =  document.getElementById("exampleFormControlTextarea1");
     newText.select();
     navigator.clipboard.writeText(newText.value);
+    props.showAlert("Copied to Clipboard", "success");
   };
-
+  
   let HandleExtraSpaces = () => {
     let newText =  text.split(/[ ] +/);
     setText(newText.join(" "));
+    props.showAlert("Extra Spaces Removed!", "success");
   };
 
   function HandleONchange(e) {
@@ -51,9 +59,7 @@ const Textarea = (props) => {
 
   let wordsC = () => {
     let wordsCount =
-      text.split(" ")[text.split(" ").length - 1] === ""
-        ? text.split(" ").length - 1
-        : text.split(" ").length;
+      text.split(" ")[text.split(" ").length - 1] === "" ? text.split(" ").length - 1 : text.split(" ").length;
 
     return wordsCount;
   };
