@@ -98,7 +98,7 @@ const Textarea = (props) => {
       props.showAlert("Input Field is Empty!", "warning");
     } else {
       let newText =  text.split(/[ ] +/);
-      setText(newText.join(" "));
+      setText(newText.join(" ").trim());
       props.showAlert("Extra Spaces Removed!", "success");
     }  
   };
