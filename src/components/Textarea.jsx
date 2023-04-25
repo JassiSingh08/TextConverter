@@ -3,54 +3,104 @@ import React, { useState } from "react";
 const Textarea = (props) => {
   const [text, setText] = useState("");
 
+  const checkEmpty = () => {
+    if(document.getElementById("exampleFormControlTextarea1").value === ""){
+      return true
+    }
+  }
+
+  //UPPERCASE
   let HandleUPclick = () => {
-    let newText = text.toUpperCase();
-    setText(newText);
-    props.showAlert("Converted to Uppercase", "success");
+    if (checkEmpty() === true) {
+      props.showAlert("Input Field is Empty!", "warning");
+    } else {
+      let newText = text.toUpperCase();
+      setText(newText);
+      props.showAlert("Converted to Uppercase", "success");
+    }
   };
   
+  //LOWERCASE
   let HandleLOclick = () => {
-    let newText = text.toLowerCase();
-    setText(newText);
-    props.showAlert("Converted to Lowercase", "success");
+    if (checkEmpty() === true) {
+      props.showAlert("Input Field is Empty!", "warning");
+    } else {
+      let newText = text.toLowerCase();
+      setText(newText);
+      props.showAlert("Converted to Lowercase", "success");
+    }   
   };
   
+  //CLEAR
   let HandleClearClick = () => {
-    let newText = "";
-    setText(newText);
-    props.showAlert("Text Cleared!", "success");
+    if (checkEmpty() === true) {
+      props.showAlert("Input Field is Empty!", "warning");
+    } else {
+      let newText = "";
+      setText(newText);
+      props.showAlert("Text Cleared!", "success");
+    }   
   };
   
+  //SPEECH
   let HandleSpeech = () => {
-    let msg = new SpeechSynthesisUtterance();
-    msg.text = text;
-    window.speechSynthesis.speak(msg);
-    props.showAlert("Speaking", "success");
+    if (checkEmpty() === true) {
+      props.showAlert("Input Field is Empty!", "warning");
+    } else {
+      let msg = new SpeechSynthesisUtterance();
+      msg.text = text;
+      window.speechSynthesis.speak(msg);
+      props.showAlert("Speaking", "success");
+    }
   };
   
   let HandleStopSpeech = () => {
-    const synth = window.speechSynthesis;
-    synth.cancel();
-    props.showAlert("Stopped!", "success");
+    if (checkEmpty() === true) {
+      props.showAlert("Input Field is Empty!", "warning");
+    } else {
+      const synth = window.speechSynthesis;
+      synth.cancel();
+      props.showAlert("Stopped!", "success");
+    }  
   };
   
+
+  //CAPITALIZE
   const handleCapitalize = () => {
-    let newText = text.split(" ").map((el) => el.charAt(0).toUpperCase() + el.slice(1)).join(" ");
-    setText(newText);
-    props.showAlert("Text Capitalized!", "success");
+
+    if (checkEmpty() === true) {
+      props.showAlert("Input Field is Empty!", "warning");
+    } else {
+      let newText = text.split(" ").map((el) => el.charAt(0).toUpperCase() + el.slice(1)).join(" ");
+      setText(newText);
+      props.showAlert("Text Capitalized!", "success");
+    }  
+
   };
   
+  //COPY
   let HandleCopyClick = () => {
-    let newText =  document.getElementById("exampleFormControlTextarea1");
-    newText.select();
-    navigator.clipboard.writeText(newText.value);
-    props.showAlert("Copied to Clipboard", "success");
+
+    if (checkEmpty() === true) {
+      props.showAlert("Input Field is Empty!", "warning");
+    } else {
+      let newText =  document.getElementById("exampleFormControlTextarea1");
+      newText.select();
+      navigator.clipboard.writeText(newText.value);
+      props.showAlert("Copied to Clipboard", "success");
+    }  
+
   };
   
+  //EXTRA-SPACES
   let HandleExtraSpaces = () => {
-    let newText =  text.split(/[ ] +/);
-    setText(newText.join(" "));
-    props.showAlert("Extra Spaces Removed!", "success");
+    if (checkEmpty() === true) {
+      props.showAlert("Input Field is Empty!", "warning");
+    } else {
+      let newText =  text.split(/[ ] +/);
+      setText(newText.join(" "));
+      props.showAlert("Extra Spaces Removed!", "success");
+    }  
   };
 
   function HandleONchange(e) {
